@@ -2,7 +2,8 @@
 # startup.sh
 
 # This script prepares the Inventory Management System for launch.
-# It installs dependencies for both the backend API and the frontend client.
+# It installs dependencies for both the backend API and the frontend client,
+# and builds the frontend for production.
 
 echo "--- Starting InventoryPro Setup ---"
 
@@ -18,7 +19,7 @@ fi
 echo "--- Backend dependencies installed successfully. ---"
 echo ""
 
-# 2. Install Client dependencies
+# 2. Install and build the frontend client
 echo "--- Installing frontend dependencies (./client) ---"
 cd ../client
 npm install
@@ -28,20 +29,27 @@ if [ $? -ne 0 ]; then
 fi
 echo "--- Frontend dependencies installed successfully. ---"
 echo ""
+echo "--- Building frontend application for production... ---"
+npm run build
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to build the frontend application."
+    exit 1
+fi
+echo "--- Frontend application built successfully. ---"
+echo ""
 
+# 3. Return to root directory
+cd ..
 
-# 3. Final instructions
+# 4. Final instructions
 echo "--- Setup Complete! ---"
 echo ""
-echo "To run the application, you need to start the backend and frontend servers in separate terminals."
+echo "To run the application, you only need to start the backend server."
+echo "It will serve the built frontend application and the API."
 echo ""
-echo "In your first terminal, start the backend server:"
+echo "In your terminal, run the following commands:"
 echo "  cd api"
-echo "  npm start"
+echo "  PORT=9000 npm start"
 echo ""
-echo "In your second terminal, start the frontend development server:"
-echo "  cd client"
-echo "  npm run dev"
-echo ""
-echo "The application will be available at http://localhost:5173"
+echo "The application will be available at http://localhost:9000"
 echo ""

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { login as apiLogin } from "../services/api";
 import {
   Box,
   Button,
@@ -19,7 +20,7 @@ import {
 const Login = () => {
   const [email, setEmail] = useState("demo@inventory.pro");
   const [password, setPassword] = useState("password123");
-  const { login } = useAuth();
+  const { login: contextLogin } = useAuth();
   const navigate = useNavigate();
   const toast = useToast();
   const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +29,8 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await login({ email, password });
+      const response = await apiLogin({ email, password });
+      contextLogin(response.data.token);
       navigate("/");
     } catch (error) {
       toast({

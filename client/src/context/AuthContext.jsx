@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
         const decoded = jwtDecode(token);
         // Check if token is expired
         if (decoded.exp * 1000 > Date.now()) {
-          setUser({ id: decoded.userId, name: decoded.name, email: decoded.email });
+          setUser({ id: decoded.id, name: decoded.name, email: decoded.email });
           api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         } else {
           localStorage.removeItem("token");
@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
   const login = (token) => {
     localStorage.setItem("token", token);
     const decoded = jwtDecode(token);
-    setUser({ id: decoded.userId, name: decoded.name, email: decoded.email });
+    setUser({ id: decoded.id, name: decoded.name, email: decoded.email });
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   };
 

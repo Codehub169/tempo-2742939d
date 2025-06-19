@@ -1,16 +1,14 @@
 import axios from "axios";
-import { useAuth } from "../context/AuthContext";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "/api",
 });
 
 apiClient.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
     if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
-    }
+      config.headers["Authorization"] = `Bearer ${token}`;\n    }
     return config;
   },
   (error) => {
@@ -19,11 +17,11 @@ apiClient.interceptors.request.use(
 );
 
 export const login = (credentials) => {
-  return apiClient.post("/auth/login", credentials);
+  return apiClient.post("/login", credentials);
 };
 
 export const register = (userData) => {
-  return apiClient.post("/auth/register", userData);
+  return apiClient.post("/register", userData);
 };
 
 // Inventory endpoints

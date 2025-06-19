@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { register as registerUser } from "../services/api";
+import { register as registerUser, login as apiLogin } from "../services/api";
 import {
   Box,
   Button,
@@ -21,7 +21,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { login } = useAuth();
+  const { login: contextLogin } = useAuth();
   const navigate = useNavigate();
   const toast = useToast();
 
@@ -31,7 +31,8 @@ const Register = () => {
     try {
       await registerUser({ name, email, password });
       // Automatically log in the user after successful registration
-      await login({ email, password });
+      const response = await apiLogin({ email, password });
+      contextLogin(response.data.token);
       toast({
         title: "Account created.",
         description: "You've been successfully registered and logged in.",
