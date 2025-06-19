@@ -1,7 +1,7 @@
 import { Outlet, Link as RouterLink, useLocation } from "react-router-dom";
 import { Box, Flex, Heading, Text, Avatar, Button, VStack, Link } from "@chakra-ui/react";
 import { Home, Package, BarChart2, LogOut } from "react-feather";
-import { useAuth } from "./context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 const NavItem = ({ icon, children, to }) => {
     const location = useLocation();
