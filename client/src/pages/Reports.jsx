@@ -152,7 +152,15 @@ const Reports = () => {
               <option style={{ color: 'black' }} value="Home Goods">Home Goods</option>
             </Select>
           </FormControl>
-          <Button type="submit" colorScheme="pink" alignSelf="end" isLoading={isLoading} leftIcon={<Play size={18} />}>
+          <Button
+            type="submit"
+            alignSelf="end"
+            isLoading={isLoading}
+            leftIcon={<Play size={18} />}
+            bg="linear-gradient(45deg, #e94560, #ff7e5f)"
+            color="white"
+            _hover={{ transform: "translateY(-2px)", boxShadow: "lg" }}
+          >
             Generate
           </Button>
         </SimpleGrid>
@@ -179,7 +187,8 @@ const Reports = () => {
                   <Tr>
                     {reportData.headers.map((header) => (
                       <Th key={header}>{header}</Th>
-                    ))}\n                  </Tr>
+                    ))}
+                  </Tr>
                 </Thead>
                 <Tbody>
                   {reportData.items.map((item, index) => (

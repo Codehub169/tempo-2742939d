@@ -160,7 +160,13 @@ const Inventory = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </InputGroup>
-          <Button leftIcon={<Plus size={20} />} colorScheme="pink" onClick={() => handleOpenModal()}>
+          <Button
+            leftIcon={<Plus size={20} />}
+            onClick={() => handleOpenModal()}
+            bg="linear-gradient(45deg, #e94560, #ff7e5f)"
+            color="white"
+            _hover={{ transform: "translateY(-2px)", boxShadow: "lg" }}
+          >
             Add New Item
           </Button>
         </Flex>
@@ -281,7 +287,14 @@ const Inventory = () => {
           </ModalBody>
           <ModalFooter>
             <Button onClick={handleCloseModal} mr={3}>Cancel</Button>
-            <Button colorScheme="pink" type="submit">Save</Button>
+            <Button
+              bg="linear-gradient(45deg, #e94560, #ff7e5f)"
+              color="white"
+              _hover={{ transform: "translateY(-2px)", boxShadow: "lg" }}
+              type="submit"
+            >
+              Save
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
