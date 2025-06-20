@@ -64,8 +64,8 @@ const Inventory = () => {
 
   useEffect(() => {
     const results = inventory.filter(item =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.sku.toLowerCase().includes(searchTerm.toLowerCase())
+      (item.name && item.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (item.sku && item.sku.toLowerCase().includes(searchTerm.toLowerCase()))
     );
     setFilteredInventory(results);
   }, [searchTerm, inventory]);
@@ -99,6 +99,7 @@ const Inventory = () => {
   };
 
   const handleDeleteConfirm = async () => {
+    if (!itemToDelete) return;
     try {
       await deleteInventoryItem(itemToDelete.id);
       toast({ title: "Item deleted", status: "success", duration: 3000, isClosable: true });
@@ -202,7 +203,7 @@ const Inventory = () => {
                   <Td isNumeric>${item.price.toFixed(2)}</Td>
                   <Td>{getStatusBadge(item.stock)}</Td>
                   <Td>
-                    <Button variant="ghost" size="sm" onClick={() => handleOpenModal(item)}><Edit size={16} /></Button>
+                    <Button variant="ghost" size="sm" colorScheme="blue" onClick={() => handleOpenModal(item)}><Edit size={16} /></Button>
                     <Button variant="ghost" size="sm" colorScheme="red" onClick={() => handleDeleteClick(item)}><Trash2 size={16} /></Button>
                   </Td>
                 </Tr>
@@ -213,7 +214,7 @@ const Inventory = () => {
       </Box>
 
       {/* Add/Edit Modal */}
-      <Modal isOpen={isOpen} onClose={handleCloseModal}>
+      <Modal isOpen={isOpen} onClose={handleCloseModal} isCentered>
         <ModalOverlay />
         <ModalContent as="form" onSubmit={handleFormSubmit} bg="brand.cardBg">
           <ModalHeader>{currentItem ? "Edit Item" : "Add New Item"}</ModalHeader>
@@ -286,7 +287,7 @@ const Inventory = () => {
             </Flex>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={handleCloseModal} mr={3}>Cancel</Button>
+            <Button onClick={handleCloseModal} mr={3} variant="outline">Cancel</Button>
             <Button
               bg="linear-gradient(45deg, #e94560, #ff7e5f)"
               color="white"
@@ -304,6 +305,7 @@ const Inventory = () => {
         isOpen={isDeleteAlertOpen}
         leastDestructiveRef={cancelRef}
         onClose={() => setIsDeleteAlertOpen(false)}
+        isCentered
       >
         <AlertDialogOverlay>
           <AlertDialogContent bg="brand.cardBg">
@@ -314,7 +316,7 @@ const Inventory = () => {
               Are you sure you want to delete "{itemToDelete?.name}"? This action cannot be undone.
             </AlertDialogBody>
             <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={() => setIsDeleteAlertOpen(false)}>
+              <Button ref={cancelRef} onClick={() => setIsDeleteAlertOpen(false)} variant="outline">
                 Cancel
               </Button>
               <Button colorScheme="red" onClick={handleDeleteConfirm} ml={3}>
