@@ -9,13 +9,13 @@ const ProtectedRoute = ({ children }) => {
 
   if (loading) {
     return (
-       <Box bg="var(--bg-color)" h="100vh">
+       <Box bg="brand.bg" h="100vh">
         <Center h="100%">
           <Spinner
             thickness="4px"
             speed="0.65s"
             emptyColor="gray.600"
-            color="var(--accent-color)"
+            color="brand.accent"
             size="xl"
           />
         </Center>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { login as apiLogin } from "../services/api";
@@ -12,7 +12,6 @@ import {
   Input,
   Stack,
   Text,
-  useColorModeValue,
   Link,
   useToast,
 } from "@chakra-ui/react";
@@ -47,25 +46,26 @@ const Login = () => {
 
   return (
     <Box
-      bg="var(--bg-color)"
+      bg="brand.bg"
       minH="100vh"
       display="flex"
       alignItems="center"
       justifyContent="center"
-      color="var(--font-color)"
+      color="brand.font"
     >
       <Container
         maxW="md"
         p={8}
         bg="rgba(22, 33, 62, 0.85)"
-        border="1px solid var(--border-color)"
+        border="1px"
+        borderColor="brand.border"
         borderRadius="xl"
         boxShadow="lg"
       >
         <Stack spacing={6} as="form" onSubmit={handleSubmit}>
           <Stack spacing={2} textAlign="center">
             <Heading fontSize="3xl" fontWeight="bold" color="white">
-              Inventory<Text as="span" color="var(--accent-color)">Pro</Text>
+              Inventory<Text as="span" color="brand.accent">Pro</Text>
             </Heading>
             <Text>Welcome back! Please sign in to continue.</Text>
           </Stack>
@@ -76,12 +76,12 @@ const Login = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              bg="var(--bg-color)"
-              borderColor="var(--border-color)"
-              _hover={{ borderColor: "var(--accent-color)" }}
+              bg="brand.bg"
+              borderColor="brand.border"
+              _hover={{ borderColor: "brand.accent" }}
               _focus={{
-                borderColor: "var(--accent-color)",
-                boxShadow: "0 0 0 1px var(--accent-color)",
+                borderColor: "brand.accent",
+                boxShadow: "0 0 0 1px #e94560",
               }}
             />
           </FormControl>
@@ -92,12 +92,12 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              bg="var(--bg-color)"
-              borderColor="var(--border-color)"
-              _hover={{ borderColor: "var(--accent-color)" }}
+              bg="brand.bg"
+              borderColor="brand.border"
+              _hover={{ borderColor: "brand.accent" }}
               _focus={{
-                borderColor: "var(--accent-color)",
-                boxShadow: "0 0 0 1px var(--accent-color)",
+                borderColor: "brand.accent",
+                boxShadow: "0 0 0 1px #e94560",
               }}
             />
           </FormControl>
@@ -105,7 +105,7 @@ const Login = () => {
             type="submit"
             isLoading={isLoading}
             loadingText="Signing In..."
-            bg="linear-gradient(45deg, var(--accent-color), #ff7e5f)"
+            bg="linear-gradient(45deg, #e94560, #ff7e5f)"
             color="white"
             _hover={{ transform: "translateY(-2px)", boxShadow: "lg" }}
           >
@@ -113,7 +113,7 @@ const Login = () => {
           </Button>
           <Text align="center">
             Don't have an account?{" "}
-            <Link as={RouterLink} to="/register" color="var(--accent-color)" fontWeight="medium">
+            <Link as={RouterLink} to="/register" color="brand.accent" fontWeight="medium">
               Create an Account
             </Link>
           </Text>

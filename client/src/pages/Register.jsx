@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { register as registerUser, login as apiLogin } from "../services/api";
@@ -56,25 +56,26 @@ const Register = () => {
 
   return (
     <Box
-      bg="var(--bg-color)"
+      bg="brand.bg"
       minH="100vh"
       display="flex"
       alignItems="center"
       justifyContent="center"
-      color="var(--font-color)"
+      color="brand.font"
     >
       <Container
         maxW="md"
         p={8}
         bg="rgba(22, 33, 62, 0.85)"
-        border="1px solid var(--border-color)"
+        border="1px"
+        borderColor="brand.border"
         borderRadius="xl"
         boxShadow="lg"
       >
         <Stack spacing={6} as="form" onSubmit={handleSubmit}>
           <Stack spacing={2} textAlign="center">
             <Heading fontSize="3xl" fontWeight="bold" color="white">
-              Inventory<Text as="span" color="var(--accent-color)">Pro</Text>
+              Inventory<Text as="span" color="brand.accent">Pro</Text>
             </Heading>
             <Text>Create your account to get started.</Text>
           </Stack>
@@ -85,12 +86,12 @@ const Register = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              bg="var(--bg-color)"
-              borderColor="var(--border-color)"
-              _hover={{ borderColor: "var(--accent-color)" }}
+              bg="brand.bg"
+              borderColor="brand.border"
+              _hover={{ borderColor: "brand.accent" }}
               _focus={{
-                borderColor: "var(--accent-color)",
-                boxShadow: "0 0 0 1px var(--accent-color)",
+                borderColor: "brand.accent",
+                boxShadow: "0 0 0 1px #e94560",
               }}
             />
           </FormControl>
@@ -101,12 +102,12 @@ const Register = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              bg="var(--bg-color)"
-              borderColor="var(--border-color)"
-              _hover={{ borderColor: "var(--accent-color)" }}
+              bg="brand.bg"
+              borderColor="brand.border"
+              _hover={{ borderColor: "brand.accent" }}
               _focus={{
-                borderColor: "var(--accent-color)",
-                boxShadow: "0 0 0 1px var(--accent-color)",
+                borderColor: "brand.accent",
+                boxShadow: "0 0 0 1px #e94560",
               }}
             />
           </FormControl>
@@ -117,12 +118,12 @@ const Register = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              bg="var(--bg-color)"
-              borderColor="var(--border-color)"
-              _hover={{ borderColor: "var(--accent-color)" }}
+              bg="brand.bg"
+              borderColor="brand.border"
+              _hover={{ borderColor: "brand.accent" }}
               _focus={{
-                borderColor: "var(--accent-color)",
-                boxShadow: "0 0 0 1px var(--accent-color)",
+                borderColor: "brand.accent",
+                boxShadow: "0 0 0 1px #e94560",
               }}
             />
           </FormControl>
@@ -130,7 +131,7 @@ const Register = () => {
             type="submit"
             isLoading={isLoading}
             loadingText="Creating Account..."
-            bg="linear-gradient(45deg, var(--accent-color), #ff7e5f)"
+            bg="linear-gradient(45deg, #e94560, #ff7e5f)"
             color="white"
             _hover={{ transform: "translateY(-2px)", boxShadow: "lg" }}
           >
@@ -138,7 +139,7 @@ const Register = () => {
           </Button>
           <Text align="center">
             Already have an account?{" "}
-            <Link as={RouterLink} to="/login" color="var(--accent-color)" fontWeight="medium">
+            <Link as={RouterLink} to="/login" color="brand.accent" fontWeight="medium">
               Sign In
             </Link>
           </Text>

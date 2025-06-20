@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Heading,
@@ -68,8 +68,8 @@ const Reports = () => {
     }
     // Basic CSV conversion
     const headers = Object.keys(reportData.items[0]).join(",");
-    const rows = reportData.items.map(row => Object.values(row).join(",")).join("\\n");
-    const csvContent = `data:text/csv;charset=utf-8,${headers}\\n${rows}`;
+    const rows = reportData.items.map(row => Object.values(row).join(",")).join("\n");
+    const csvContent = `data:text/csv;charset=utf-8,${headers}\n${rows}`;
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
@@ -92,12 +92,12 @@ const Reports = () => {
       <Box
         as="form"
         onSubmit={handleGenerateReport}
-        bg="var(--card-bg)"
+        bg="brand.cardBg"
         p={6}
         borderRadius="lg"
         mt={6}
         borderWidth="1px"
-        borderColor="var(--border-color)"
+        borderColor="brand.border"
       >
         <SimpleGrid columns={{ base: 1, md: 5 }} spacing={4}>
           <FormControl>
@@ -147,7 +147,7 @@ const Reports = () => {
               Export CSV
             </Button>
           </Flex>
-          <Box bg="var(--card-bg)" borderRadius="lg" borderWidth="1px" borderColor="var(--border-color)">
+          <Box bg="brand.cardBg" borderRadius="lg" borderWidth="1px" borderColor="brand.border">
             <TableContainer>
               <Table>
                 <Thead>
@@ -162,14 +162,14 @@ const Reports = () => {
                     <Tr key={index}>
                       {Object.values(item).map((value, i) => (
                         <Td key={i}>{typeof value === 'number' && reportData.headers[i].toLowerCase().includes('value') ? `$${value.toFixed(2)}` : value}</Td>
-                      ))}
+                      ))}\
                     </Tr>
                   ))}
                 </Tbody>
               </Table>
             </TableContainer>
              {reportData.summary && (
-              <Box p={4} textAlign="right" fontWeight="bold" borderTopWidth="1px" borderColor="var(--border-color)">
+              <Box p={4} textAlign="right" fontWeight="bold" borderTopWidth="1px" borderColor="brand.border">
                 {reportData.summary.label}: ${reportData.summary.value.toFixed(2)}
               </Box>
             )}

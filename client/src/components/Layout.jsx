@@ -1,3 +1,4 @@
+import React from 'react';
 import { Outlet, Link as RouterLink, useLocation } from "react-router-dom";
 import { Box, Flex, Heading, Text, Avatar, Button, VStack, Link } from "@chakra-ui/react";
 import { Home, Package, BarChart2, LogOut } from "react-feather";
@@ -17,9 +18,9 @@ const NavItem = ({ icon, children, to }) => {
             borderRadius="md"
             fontWeight="medium"
             color={isActive ? "white" : "gray.300"}
-            bg={isActive ? "accent" : "transparent"}
+            bg={isActive ? "brand.accent" : "transparent"}
             _hover={{
-                bg: "accent",
+                bg: "brand.accent",
                 color: "white",
             }}
             style={{ textDecoration: "none" }}
@@ -34,12 +35,12 @@ const Layout = () => {
     const { user, logout } = useAuth();
     
     return (
-        <Flex h="100vh" bg="bg-color" color="font-color">
+        <Flex h="100vh" bg="brand.bg" color="brand.font">
             {/* Sidebar */}
-            <Box w="260px" bg="primary" p={6} display="flex" flexDirection="column" borderRight="1px" borderColor="border-color">
+            <Box w="260px" bg="brand.primary" p={6} display="flex" flexDirection="column" borderRight="1px" borderColor="brand.border">
                 <Flex align="center" mb={10}>
                     <Heading as="h1" size="lg" color="white">
-                        Inventory<Text as="span" color="accent">Pro</Text>
+                        Inventory<Text as="span" color="brand.accent">Pro</Text>
                     </Heading>
                 </Flex>
                 <VStack as="nav" spacing={2} align="stretch">
@@ -48,13 +49,13 @@ const Layout = () => {
                     <NavItem to="/reports" icon={<BarChart2 />}>Reports</NavItem>
                 </VStack>
                 <Box mt="auto">
-                    <Flex align="center" p={4} bg="card-bg" borderRadius="md">
+                    <Flex align="center" p={4} bg="brand.cardBg" borderRadius="md">
                         <Avatar size="md" name={user?.name} mr={4} />
                         <Box>
                             <Text fontWeight="bold" color="white">{user?.name || "User"}</Text>
                             <Text fontSize="sm" opacity={0.7}>{user?.email}</Text>
                         </Box>
-                        <Button onClick={logout} variant="ghost" size="sm" ml="auto" _hover={{ bg: "transparent", color: "accent" }}>
+                        <Button onClick={logout} variant="ghost" size="sm" ml="auto" _hover={{ bg: "transparent", color: "brand.accent" }}>
                             <LogOut size={20} />
                         </Button>
                     </Flex>

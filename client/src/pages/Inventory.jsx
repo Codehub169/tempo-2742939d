@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Box,
   Heading,
@@ -56,7 +56,7 @@ const Inventory = () => {
   
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const cancelRef = React.useRef();
+  const cancelRef = useRef();
 
   useEffect(() => {
     fetchInventory();
@@ -166,7 +166,7 @@ const Inventory = () => {
         </Flex>
       </Flex>
       
-      <Box bg="var(--card-bg)" borderRadius="lg" borderWidth="1px" borderColor="var(--border-color)">
+      <Box bg="brand.cardBg" borderRadius="lg" borderWidth="1px" borderColor="brand.border">
         <TableContainer>
           <Table variant="simple">
             <Thead>
@@ -209,7 +209,7 @@ const Inventory = () => {
       {/* Add/Edit Modal */}
       <Modal isOpen={isOpen} onClose={handleCloseModal}>
         <ModalOverlay />
-        <ModalContent as="form" onSubmit={handleFormSubmit} bg="var(--card-bg)">
+        <ModalContent as="form" onSubmit={handleFormSubmit} bg="brand.cardBg">
           <ModalHeader>{currentItem ? "Edit Item" : "Add New Item"}</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
@@ -234,13 +234,13 @@ const Inventory = () => {
             <Flex mt={4}>
               <FormControl mr={2} isRequired>
                 <FormLabel>Quantity</FormLabel>
-                <NumberInput name="stock" defaultValue={currentItem?.stock || 0} min={0}>
+                <NumberInput defaultValue={currentItem?.stock || 0} min={0}>
                   <NumberInputField name="stock" />
                 </NumberInput>
               </FormControl>
               <FormControl ml={2} isRequired>
                 <FormLabel>Price ($)</FormLabel>
-                 <NumberInput name="price" defaultValue={currentItem?.price || 0} precision={2} step={0.01} min={0}>
+                 <NumberInput defaultValue={currentItem?.price || 0} precision={2} step={0.01} min={0}>
                    <NumberInputField name="price" />
                  </NumberInput>
               </FormControl>
@@ -260,7 +260,7 @@ const Inventory = () => {
         onClose={() => setIsDeleteAlertOpen(false)}
       >
         <AlertDialogOverlay>
-          <AlertDialogContent bg="var(--card-bg)">
+          <AlertDialogContent bg="brand.cardBg">
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
               Delete Item
             </AlertDialogHeader>
