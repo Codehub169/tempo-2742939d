@@ -20,6 +20,7 @@ import {
   Spinner,
   Center,
   VStack,
+  Flex,
 } from "@chakra-ui/react";
 import { Play, Download } from "react-feather";
 import { getInventoryReport } from "../services/api";
@@ -60,14 +61,12 @@ const Reports = () => {
     }
   };
   
-  // A placeholder for CSV export functionality
   const handleExportCsv = () => {
     if (!reportData || reportData.items.length === 0) {
       toast({ title: "No data to export", status: "warning", duration: 3000 });
       return;
     }
-    // Basic CSV conversion
-    const headers = Object.keys(reportData.items[0]).join(",");
+    const headers = reportData.headers.join(",");
     const rows = reportData.items.map(row => Object.values(row).join(",")).join("\n");
     const csvContent = `data:text/csv;charset=utf-8,${headers}\n${rows}`;
     const encodedUri = encodeURI(csvContent);
@@ -102,29 +101,55 @@ const Reports = () => {
         <SimpleGrid columns={{ base: 1, md: 5 }} spacing={4}>
           <FormControl>
             <FormLabel>Report Type</FormLabel>
-            <Select name="reportType" value={params.reportType} onChange={handleInputChange}>
-              <option value="stock-levels">Current Stock Levels</option>
-              <option value="low-stock">Low Stock Alerts</option>
-              <option value="inventory-value">Inventory Value</option>
+            <Select
+              name="reportType"
+              value={params.reportType}
+              onChange={handleInputChange}
+              bg="brand.bg"
+              borderColor="brand.border"
+            >
+              <option style={{ color: 'black' }} value="stock-levels">Current Stock Levels</option>
+              <option style={{ color: 'black' }} value="low-stock">Low Stock Alerts</option>
+              <option style={{ color: 'black' }} value="inventory-value">Inventory Value</option>
             </Select>
           </FormControl>
           <FormControl>
             <FormLabel>Date From</FormLabel>
-            <Input type="date" name="dateFrom" value={params.dateFrom} onChange={handleInputChange} />
+            <Input
+              type="date"
+              name="dateFrom"
+              value={params.dateFrom}
+              onChange={handleInputChange}
+              bg="brand.bg"
+              borderColor="brand.border"
+            />
           </FormControl>
           <FormControl>
             <FormLabel>Date To</FormLabel>
-            <Input type="date" name="dateTo" value={params.dateTo} onChange={handleInputChange} />
+            <Input
+              type="date"
+              name="dateTo"
+              value={params.dateTo}
+              onChange={handleInputChange}
+              bg="brand.bg"
+              borderColor="brand.border"
+            />
           </FormControl>
           <FormControl>
             <FormLabel>Category</FormLabel>
-            <Select name="category" value={params.category} onChange={handleInputChange}>
-              <option value="all">All Categories</option>
-              <option value="Electronics">Electronics</option>
-              <option value="Groceries">Groceries</option>
-              <option value="Apparel">Apparel</option>
-              <option value="Books">Books</option>
-              <option value="Home Goods">Home Goods</option>
+            <Select
+              name="category"
+              value={params.category}
+              onChange={handleInputChange}
+              bg="brand.bg"
+              borderColor="brand.border"
+            >
+              <option style={{ color: 'black' }} value="all">All Categories</option>
+              <option style={{ color: 'black' }} value="Electronics">Electronics</option>
+              <option style={{ color: 'black' }} value="Groceries">Groceries</option>
+              <option style={{ color: 'black' }} value="Apparel">Apparel</option>
+              <option style={{ color: 'black' }} value="Books">Books</option>
+              <option style={{ color: 'black' }} value="Home Goods">Home Goods</option>
             </Select>
           </FormControl>
           <Button type="submit" colorScheme="pink" alignSelf="end" isLoading={isLoading} leftIcon={<Play size={18} />}>
@@ -154,15 +179,14 @@ const Reports = () => {
                   <Tr>
                     {reportData.headers.map((header) => (
                       <Th key={header}>{header}</Th>
-                    ))}
-                  </Tr>
+                    ))}\n                  </Tr>
                 </Thead>
                 <Tbody>
                   {reportData.items.map((item, index) => (
                     <Tr key={index}>
                       {Object.values(item).map((value, i) => (
                         <Td key={i}>{typeof value === 'number' && reportData.headers[i].toLowerCase().includes('value') ? `$${value.toFixed(2)}` : value}</Td>
-                      ))}\
+                      ))}
                     </Tr>
                   ))}
                 </Tbody>

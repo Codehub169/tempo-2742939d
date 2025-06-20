@@ -215,34 +215,67 @@ const Inventory = () => {
           <ModalBody pb={6}>
             <FormControl isRequired>
               <FormLabel>Product Name</FormLabel>
-              <Input name="name" defaultValue={currentItem?.name} />
+              <Input
+                name="name"
+                defaultValue={currentItem?.name}
+                bg="brand.bg"
+                borderColor="brand.border"
+                _hover={{ borderColor: "brand.accent" }}
+                _focus={{ borderColor: "brand.accent", boxShadow: "0 0 0 1px #e94560" }}
+              />
             </FormControl>
             <FormControl mt={4} isRequired>
               <FormLabel>SKU</FormLabel>
-              <Input name="sku" defaultValue={currentItem?.sku} />
+              <Input
+                name="sku"
+                defaultValue={currentItem?.sku}
+                bg="brand.bg"
+                borderColor="brand.border"
+                _hover={{ borderColor: "brand.accent" }}
+                _focus={{ borderColor: "brand.accent", boxShadow: "0 0 0 1px #e94560" }}
+              />
             </FormControl>
             <FormControl mt={4} isRequired>
               <FormLabel>Category</FormLabel>
-              <Select name="category" defaultValue={currentItem?.category || "Electronics"}>
-                <option value="Electronics">Electronics</option>
-                <option value="Groceries">Groceries</option>
-                <option value="Apparel">Apparel</option>
-                <option value="Books">Books</option>
-                <option value="Home Goods">Home Goods</option>
+              <Select
+                name="category"
+                defaultValue={currentItem?.category || "Electronics"}
+                bg="brand.bg"
+                borderColor="brand.border"
+                _hover={{ borderColor: "brand.accent" }}
+                _focus={{ borderColor: "brand.accent", boxShadow: "0 0 0 1px #e94560" }}
+              >
+                <option style={{ color: 'black' }} value="Electronics">Electronics</option>
+                <option style={{ color: 'black' }} value="Groceries">Groceries</option>
+                <option style={{ color: 'black' }} value="Apparel">Apparel</option>
+                <option style={{ color: 'black' }} value="Books">Books</option>
+                <option style={{ color: 'black' }} value="Home Goods">Home Goods</option>
               </Select>
             </FormControl>
             <Flex mt={4}>
               <FormControl mr={2} isRequired>
                 <FormLabel>Quantity</FormLabel>
                 <NumberInput defaultValue={currentItem?.stock || 0} min={0}>
-                  <NumberInputField name="stock" />
+                  <NumberInputField
+                    name="stock"
+                    bg="brand.bg"
+                    borderColor="brand.border"
+                    _hover={{ borderColor: "brand.accent" }}
+                    _focus={{ borderColor: "brand.accent", boxShadow: "0 0 0 1px #e94560" }}
+                  />
                 </NumberInput>
               </FormControl>
               <FormControl ml={2} isRequired>
                 <FormLabel>Price ($)</FormLabel>
-                 <NumberInput defaultValue={currentItem?.price || 0} precision={2} step={0.01} min={0}>
-                   <NumberInputField name="price" />
-                 </NumberInput>
+                <NumberInput defaultValue={currentItem?.price || 0} precision={2} step={0.01} min={0}>
+                  <NumberInputField
+                    name="price"
+                    bg="brand.bg"
+                    borderColor="brand.border"
+                    _hover={{ borderColor: "brand.accent" }}
+                    _focus={{ borderColor: "brand.accent", boxShadow: "0 0 0 1px #e94560" }}
+                  />
+                </NumberInput>
               </FormControl>
             </Flex>
           </ModalBody>
